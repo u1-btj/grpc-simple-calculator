@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "calculator_protoc/";
+package calculator_protoc;
+
+service Calculation {
+  rpc Addition (NumRequest) returns (NumReply) {}
+  rpc Substraction (NumRequest) returns (NumReply) {}
+  rpc Multiplication (NumRequest) returns (NumReply) {}
+  rpc Division (NumRequest) returns (NumReply) {}
+}
+
+message NumRequest {
+  float num_a = 1;
+  float num_b = 2;
+}
+
+message NumReply {
+  float result = 1;
+}
