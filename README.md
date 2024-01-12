@@ -1,7 +1,7 @@
 ## **Assignment Task: Build a Simple Calculator gRPC Service - (Yuma Anugrah Virya Gunawan)**
 
 ## To Do
-1. [How To Setup gRPC Project](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-run-the-server--client-services)
+1. [How To Setup gRPC Project](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-setup-grpc-project)
 2. [How To Run The Server & Client Services](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-run-the-server--client-services)
 3. [Test Case Example](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#test-case-example)
 
