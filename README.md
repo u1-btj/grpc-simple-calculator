@@ -1,6 +1,5 @@
 ## **Assignment Task: Build a Simple Calculator gRPC Service - (Yuma Anugrah Virya Gunawan)**
 
-## To Do
 More detailed objective and requirement from this task, [follow this link](https://gist.github.com/herizsh/042d92f7c489860a08d1b01e669eadcf).  
 If you want to build this project from scratch, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-build-this-project-from-scratch).  
 If you want to clone and run this repo, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-setup-this-grpc-project).  
