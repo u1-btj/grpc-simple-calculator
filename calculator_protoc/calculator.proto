@@ -11,10 +11,10 @@ service Calculation {
 }
 
 message NumRequest {
-  float num_a = 1;
-  float num_b = 2;
+  double num_a = 1;
+  double num_b = 2;
 }
 
 message NumReply {
-  float result = 1;
+  double result = 1;
 }
