@@ -17,15 +17,18 @@ var (
 	port = flag.Int("port", 8080, "Server Port")
 )
 
+// Implement calculator_protoc.CalculationServer
 type server struct {
 	pb.UnimplementedCalculationServer
 }
 
+// Printing number info on server
 func print_num_info(in *pb.NumRequest) {
 	log.Printf("Num 1: %v", in.GetNumA())
 	log.Printf("Num 2: %v", in.GetNumB())
 }
 
+// Implements rpc CalculationServer.Addition
 func (s *server) Addition(ctx context.Context, in *pb.NumRequest) (*pb.NumReply, error) {
 	num_a := in.GetNumA()
 	num_b := in.GetNumB()
@@ -35,6 +38,7 @@ func (s *server) Addition(ctx context.Context, in *pb.NumRequest) (*pb.NumReply,
 	return &pb.NumReply{Result: result}, nil
 }
 
+// Implements rpc CalculationServer.Substraction
 func (s *server) Substraction(ctx context.Context, in *pb.NumRequest) (*pb.NumReply, error) {
 	num_a := in.GetNumA()
 	num_b := in.GetNumB()
@@ -43,6 +47,7 @@ func (s *server) Substraction(ctx context.Context, in *pb.NumRequest) (*pb.NumRe
 	return &pb.NumReply{Result: result}, nil
 }
 
+// Implements rpc CalculationServer.Multiplication
 func (s *server) Multiplication(ctx context.Context, in *pb.NumRequest) (*pb.NumReply, error) {
 	num_a := in.GetNumA()
 	num_b := in.GetNumB()
@@ -51,14 +56,18 @@ func (s *server) Multiplication(ctx context.Context, in *pb.NumRequest) (*pb.Num
 	return &pb.NumReply{Result: result}, nil
 }
 
+// Implements rpc CalculationServer.Division
 func (s *server) Division(ctx context.Context, in *pb.NumRequest) (*pb.NumReply, error) {
 	num_a := in.GetNumA()
 	num_b := in.GetNumB()
+
+	// Handle zero division
 	if num_b == 0 {
 		err := status.Error(codes.InvalidArgument, "Cannot divided by zero")
 		log.Printf("Division Error: %v", err)
 		return &pb.NumReply{Result: 0}, err
 	}
+
 	result := num_a / num_b
 	log.Printf("Division: %v", result)
 	return &pb.NumReply{Result: result}, nil

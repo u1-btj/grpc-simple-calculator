@@ -3,18 +3,25 @@ syntax = "proto3";
 option go_package = "calculator_protoc/";
 package calculator_protoc;
 
+// Calculation service definition
 service Calculation {
-  rpc Addition (NumRequest) returns (NumReply) {}
-  rpc Substraction (NumRequest) returns (NumReply) {}
-  rpc Multiplication (NumRequest) returns (NumReply) {}
-  rpc Division (NumRequest) returns (NumReply) {}
+    // Do Addition (num_a + num_b)
+    rpc Addition (NumRequest) returns (NumReply) {}
+    // Do Substraction (num_a - num_b)
+    rpc Substraction (NumRequest) returns (NumReply) {}
+    // Do Multiplication (num_a * num_b)
+    rpc Multiplication (NumRequest) returns (NumReply) {}
+    // Do Division (num_a / num_b)
+    rpc Division (NumRequest) returns (NumReply) {}
 }
 
+// The number request containing first and second number
 message NumRequest {
-  double num_a = 1;
-  double num_b = 2;
+    double num_a = 1;
+    double num_b = 2;
 }
 
+// The number response containing result value based on calculation performed
 message NumReply {
-  double result = 1;
+    double result = 1;
 }

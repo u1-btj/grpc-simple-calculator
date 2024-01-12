@@ -22,9 +22,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CalculationClient interface {
+	// Do Addition (num_a + num_b)
 	Addition(ctx context.Context, in *NumRequest, opts ...grpc.CallOption) (*NumReply, error)
+	// Do Substraction (num_a - num_b)
 	Substraction(ctx context.Context, in *NumRequest, opts ...grpc.CallOption) (*NumReply, error)
+	// Do Multiplication (num_a * num_b)
 	Multiplication(ctx context.Context, in *NumRequest, opts ...grpc.CallOption) (*NumReply, error)
+	// Do Division (num_a / num_b)
 	Division(ctx context.Context, in *NumRequest, opts ...grpc.CallOption) (*NumReply, error)
 }
 
@@ -76,9 +80,13 @@ func (c *calculationClient) Division(ctx context.Context, in *NumRequest, opts .
 // All implementations must embed UnimplementedCalculationServer
 // for forward compatibility
 type CalculationServer interface {
+	// Do Addition (num_a + num_b)
 	Addition(context.Context, *NumRequest) (*NumReply, error)
+	// Do Substraction (num_a - num_b)
 	Substraction(context.Context, *NumRequest) (*NumReply, error)
+	// Do Multiplication (num_a * num_b)
 	Multiplication(context.Context, *NumRequest) (*NumReply, error)
+	// Do Division (num_a / num_b)
 	Division(context.Context, *NumRequest) (*NumReply, error)
 	mustEmbedUnimplementedCalculationServer()
 }

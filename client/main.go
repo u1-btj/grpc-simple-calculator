@@ -24,6 +24,7 @@ var (
 func main() {
 	flag.Parse()
 
+	// Set up a connection to the server
 	conn, err := grpc.Dial(*addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("Did Not Connect: %v", err)
@@ -32,6 +33,7 @@ func main() {
 	defer conn.Close()
 	c := pb.NewCalculationClient(conn)
 
+	// Contact the server
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
@@ -40,6 +42,7 @@ func main() {
 	multiply, _ := c.Multiplication(ctx, &pb.NumRequest{NumA: *num1, NumB: *num2})
 	div, err := c.Division(ctx, &pb.NumRequest{NumA: *num1, NumB: *num2})
 
+	// Print responses
 	log.Printf("Addition: %v", add.GetResult())
 	log.Printf("Substraction: %v", substract.GetResult())
 	log.Printf("Multiplication: %v", multiply.GetResult())

@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// The number request containing first and second number
 type NumRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -75,6 +76,7 @@ func (x *NumRequest) GetNumB() float64 {
 	return 0
 }
 
+// The number response containing result value based on calculation performed
 type NumReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
