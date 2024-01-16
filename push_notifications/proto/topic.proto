@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "go_server/topic_pb2";
+package topic_selection;
+
+service TopicSelection {
+    rpc StreamMeowFacts (FactRequest) returns (stream FactResponse);
+    rpc StreamAnimeQuotes (QuoteRequest) returns (stream QuoteResponse);
+}
+
+message FactRequest {
+    int32 count = 1; // how many meow facts will be returned per response
+    int32 second = 2; // time delay in second
+    int32 limit = 3; // maximum response, will be stop after reached
+}
+
+message FactResponse {
+    repeated string facts = 1; // list of meow facts
+}
+
+message QuoteRequest {
+    int32 second = 1; // time delay in second
+    int32 limit = 2; // maximum response, will be stop after reached
+}
+
+message QuoteResponse {
+    string anime = 1; // anime name
+    string character = 2; // character name
+    string quote = 3; // quote
+}
