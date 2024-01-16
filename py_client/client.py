@@ -23,6 +23,9 @@ def run():
 
     except ValueError:
         print('Please input only number')
+    
+    except grpc.RpcError as e:
+        print(f"Rpc Error : {e.details()}")
 
 def remove_trailing_zero(str_num):
     return str_num.rstrip('0').rstrip('.') if '.' in str_num else str_num
