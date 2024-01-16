@@ -1,14 +1,14 @@
-## **Assignment Task: Build a Simple Calculator gRPC Service - (Yuma Anugrah Virya Gunawan)**
+## **Assignment Task: Build a Simple Calculator gRPC Service**
 
 More detailed objective and requirement from this task, [follow this link](https://gist.github.com/herizsh/042d92f7c489860a08d1b01e669eadcf).  
-If you want to build this project from scratch, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-build-this-project-from-scratch).  
-If you want to clone and run this repo, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-setup-this-grpc-project).  
+If you want to build this project from scratch, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-build-this-project-from-scratch).  
+If you want to clone and run this repo, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-setup-this-grpc-project).  
 
 ## To Do
-1. [How To Build This Project From Scratch](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-build-this-project-from-scratch)
-2. [How To Setup This gRPC Project](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-setup-this-grpc-project)
-3. [How To Run The Server & Client Services](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-run-the-server--client-services)
-4. [Test Case Example](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#test-case-example)
+1. [How To Build This Project From Scratch](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-build-this-project-from-scratch)
+2. [How To Setup This gRPC Project](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-setup-this-grpc-project)
+3. [How To Run The Server & Client Services](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-run-the-server--client-services)
+4. [Test Case Example](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#test-case-example)
 
 ## How To Build This Project From Scratch
 ### Make sure golang already installed and properly set
@@ -42,7 +42,7 @@ Update path so that protocol compiler can find the plugin
 
     export  PATH="$PATH:$(go env GOPATH)/bin"
 
-Fill your proto file like [this example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/calculator_protoc/calculator.proto)  
+Fill your proto file like [this example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/grpc_calculator/calculator_protoc/calculator.proto)  
 Generate protobuffer file 
 
     protoc --go_out=. --go-grpc_out=. calculator_protoc/calculator.proto
@@ -50,8 +50,8 @@ Generate protobuffer file
 **Note :** When editing the proto file, need to regenerate the protobuffer by execute command above
 
 ### Create server and client file
-[Server file example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/server/main.go)  
-[Client file example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/client/main.go)  
+[Server file example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/grpc_calculator/server/main.go)  
+[Client file example](https://github.com/u1-btj/grpc-simple-calculator/blob/main/grpc_calculator/client/main.go)  
 Make sure the final structure of the project will be like this :
 ```
 +-- calculator_protoc
@@ -70,12 +70,12 @@ Make sure the final structure of the project will be like this :
     go mod tidy
 
 ### Run services
-[Run the server & client services](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-run-the-server--client-services)
+[Run the server & client services](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-run-the-server--client-services)
 
 ## How To Setup This gRPC Project
 ### Make sure golang and protoc already installed and properly set
-[Verify golang](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#make-sure-golang-already-installed-and-properly-set)  
-[Verify protoc](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#make-sure-protocol-buffer-compiler-protoc-already-installed-and-properly-set)
+[Verify golang](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#make-sure-golang-already-installed-and-properly-set)  
+[Verify protoc](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#make-sure-protocol-buffer-compiler-protoc-already-installed-and-properly-set)
 
 ### Clone this repo
 
@@ -86,7 +86,7 @@ Make sure the final structure of the project will be like this :
     cd grpc-simple-calculator
 
 ### Run services
-[Run the server & client services](https://github.com/u1-btj/grpc-simple-calculator/tree/main?tab=readme-ov-file#how-to-run-the-server--client-services)
+[Run the server & client services](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-run-the-server--client-services)
 
 ## How To Run The Server & Client Services
 ### Run the server first
