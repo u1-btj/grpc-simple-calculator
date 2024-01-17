@@ -25,9 +25,24 @@ type AnimeQuote struct {
 	Quote     string
 }
 
+type Color struct {
+	Status string
+	Base   struct {
+		Hex struct {
+			Value string
+		}
+		Rgb struct {
+			Value string
+		}
+		Hsl struct {
+			Value string
+		}
+	}
+}
+
 func main() {
 	// url := "https://meowfacts.herokuapp.com?count=5"
-	url := "https://animechan.xyz/api/random"
+	url := "https://color.serialif.com/red"
 
 	// Create an HTTP GET request
 	resp, err := http.Get(url)
@@ -43,16 +58,16 @@ func main() {
 	}
 
 	// var meow MeowFacts
-	var quotes AnimeQuote
+	var color Color
 	// err = json.Unmarshal(body, &meow)
-	err = json.Unmarshal(body, &quotes)
+	err = json.Unmarshal(body, &color)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(quotes.Anime)
-	fmt.Println(quotes.Character)
-	fmt.Println(quotes.Quote)
+	fmt.Println(color.Status)
+	fmt.Println(color.Base.Hex.Value)
+	fmt.Println(color.Base.Rgb.Value)
+	fmt.Println(color.Base.Hsl.Value)
 
 	// for i := 0; i < len(meow.Data); i++ {
 	// 	fmt.Println(meow.Data[i])

@@ -22,8 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TopicSelectionClient interface {
+	// Random cat facts stream
 	StreamMeowFacts(ctx context.Context, in *FactRequest, opts ...grpc.CallOption) (TopicSelection_StreamMeowFactsClient, error)
-	StreamAnimeQuotes(ctx context.Context, in *QuoteRequest, opts ...grpc.CallOption) (TopicSelection_StreamAnimeQuotesClient, error)
+	// Color information format stream
+	StreamColorInfo(ctx context.Context, in *ColorRequest, opts ...grpc.CallOption) (TopicSelection_StreamColorInfoClient, error)
 }
 
 type topicSelectionClient struct {
@@ -66,12 +68,12 @@ func (x *topicSelectionStreamMeowFactsClient) Recv() (*FactResponse, error) {
 	return m, nil
 }
 
-func (c *topicSelectionClient) StreamAnimeQuotes(ctx context.Context, in *QuoteRequest, opts ...grpc.CallOption) (TopicSelection_StreamAnimeQuotesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &TopicSelection_ServiceDesc.Streams[1], "/topic_selection.TopicSelection/StreamAnimeQuotes", opts...)
+func (c *topicSelectionClient) StreamColorInfo(ctx context.Context, in *ColorRequest, opts ...grpc.CallOption) (TopicSelection_StreamColorInfoClient, error) {
+	stream, err := c.cc.NewStream(ctx, &TopicSelection_ServiceDesc.Streams[1], "/topic_selection.TopicSelection/StreamColorInfo", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &topicSelectionStreamAnimeQuotesClient{stream}
+	x := &topicSelectionStreamColorInfoClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -81,17 +83,17 @@ func (c *topicSelectionClient) StreamAnimeQuotes(ctx context.Context, in *QuoteR
 	return x, nil
 }
 
-type TopicSelection_StreamAnimeQuotesClient interface {
-	Recv() (*QuoteResponse, error)
+type TopicSelection_StreamColorInfoClient interface {
+	Recv() (*ColorResponse, error)
 	grpc.ClientStream
 }
 
-type topicSelectionStreamAnimeQuotesClient struct {
+type topicSelectionStreamColorInfoClient struct {
 	grpc.ClientStream
 }
 
-func (x *topicSelectionStreamAnimeQuotesClient) Recv() (*QuoteResponse, error) {
-	m := new(QuoteResponse)
+func (x *topicSelectionStreamColorInfoClient) Recv() (*ColorResponse, error) {
+	m := new(ColorResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -102,8 +104,10 @@ func (x *topicSelectionStreamAnimeQuotesClient) Recv() (*QuoteResponse, error) {
 // All implementations must embed UnimplementedTopicSelectionServer
 // for forward compatibility
 type TopicSelectionServer interface {
+	// Random cat facts stream
 	StreamMeowFacts(*FactRequest, TopicSelection_StreamMeowFactsServer) error
-	StreamAnimeQuotes(*QuoteRequest, TopicSelection_StreamAnimeQuotesServer) error
+	// Color information format stream
+	StreamColorInfo(*ColorRequest, TopicSelection_StreamColorInfoServer) error
 	mustEmbedUnimplementedTopicSelectionServer()
 }
 
@@ -114,8 +118,8 @@ type UnimplementedTopicSelectionServer struct {
 func (UnimplementedTopicSelectionServer) StreamMeowFacts(*FactRequest, TopicSelection_StreamMeowFactsServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamMeowFacts not implemented")
 }
-func (UnimplementedTopicSelectionServer) StreamAnimeQuotes(*QuoteRequest, TopicSelection_StreamAnimeQuotesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamAnimeQuotes not implemented")
+func (UnimplementedTopicSelectionServer) StreamColorInfo(*ColorRequest, TopicSelection_StreamColorInfoServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamColorInfo not implemented")
 }
 func (UnimplementedTopicSelectionServer) mustEmbedUnimplementedTopicSelectionServer() {}
 
@@ -151,24 +155,24 @@ func (x *topicSelectionStreamMeowFactsServer) Send(m *FactResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _TopicSelection_StreamAnimeQuotes_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(QuoteRequest)
+func _TopicSelection_StreamColorInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ColorRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(TopicSelectionServer).StreamAnimeQuotes(m, &topicSelectionStreamAnimeQuotesServer{stream})
+	return srv.(TopicSelectionServer).StreamColorInfo(m, &topicSelectionStreamColorInfoServer{stream})
 }
 
-type TopicSelection_StreamAnimeQuotesServer interface {
-	Send(*QuoteResponse) error
+type TopicSelection_StreamColorInfoServer interface {
+	Send(*ColorResponse) error
 	grpc.ServerStream
 }
 
-type topicSelectionStreamAnimeQuotesServer struct {
+type topicSelectionStreamColorInfoServer struct {
 	grpc.ServerStream
 }
 
-func (x *topicSelectionStreamAnimeQuotesServer) Send(m *QuoteResponse) error {
+func (x *topicSelectionStreamColorInfoServer) Send(m *ColorResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -186,8 +190,8 @@ var TopicSelection_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamAnimeQuotes",
-			Handler:       _TopicSelection_StreamAnimeQuotes_Handler,
+			StreamName:    "StreamColorInfo",
+			Handler:       _TopicSelection_StreamColorInfo_Handler,
 			ServerStreams: true,
 		},
 	},

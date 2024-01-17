@@ -6,7 +6,8 @@ import topic_pb2 as topic__pb2
 
 
 class TopicSelectionStub(object):
-    """Missing associated documentation comment in .proto file."""
+    """Topic selection service definition
+    """
 
     def __init__(self, channel):
         """Constructor.
@@ -19,24 +20,27 @@ class TopicSelectionStub(object):
                 request_serializer=topic__pb2.FactRequest.SerializeToString,
                 response_deserializer=topic__pb2.FactResponse.FromString,
                 )
-        self.StreamAnimeQuotes = channel.unary_stream(
-                '/topic_selection.TopicSelection/StreamAnimeQuotes',
-                request_serializer=topic__pb2.QuoteRequest.SerializeToString,
-                response_deserializer=topic__pb2.QuoteResponse.FromString,
+        self.StreamColorInfo = channel.unary_stream(
+                '/topic_selection.TopicSelection/StreamColorInfo',
+                request_serializer=topic__pb2.ColorRequest.SerializeToString,
+                response_deserializer=topic__pb2.ColorResponse.FromString,
                 )
 
 
 class TopicSelectionServicer(object):
-    """Missing associated documentation comment in .proto file."""
+    """Topic selection service definition
+    """
 
     def StreamMeowFacts(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Random cat facts stream
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def StreamAnimeQuotes(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def StreamColorInfo(self, request, context):
+        """Color information format stream
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -49,10 +53,10 @@ def add_TopicSelectionServicer_to_server(servicer, server):
                     request_deserializer=topic__pb2.FactRequest.FromString,
                     response_serializer=topic__pb2.FactResponse.SerializeToString,
             ),
-            'StreamAnimeQuotes': grpc.unary_stream_rpc_method_handler(
-                    servicer.StreamAnimeQuotes,
-                    request_deserializer=topic__pb2.QuoteRequest.FromString,
-                    response_serializer=topic__pb2.QuoteResponse.SerializeToString,
+            'StreamColorInfo': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamColorInfo,
+                    request_deserializer=topic__pb2.ColorRequest.FromString,
+                    response_serializer=topic__pb2.ColorResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,7 +66,8 @@ def add_TopicSelectionServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class TopicSelection(object):
-    """Missing associated documentation comment in .proto file."""
+    """Topic selection service definition
+    """
 
     @staticmethod
     def StreamMeowFacts(request,
@@ -82,7 +87,7 @@ class TopicSelection(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def StreamAnimeQuotes(request,
+    def StreamColorInfo(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,8 +97,8 @@ class TopicSelection(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/topic_selection.TopicSelection/StreamAnimeQuotes',
-            topic__pb2.QuoteRequest.SerializeToString,
-            topic__pb2.QuoteResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/topic_selection.TopicSelection/StreamColorInfo',
+            topic__pb2.ColorRequest.SerializeToString,
+            topic__pb2.ColorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

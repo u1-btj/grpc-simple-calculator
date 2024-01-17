@@ -3,9 +3,12 @@ syntax = "proto3";
 option go_package = "go_server/topic_pb2";
 package topic_selection;
 
+// Topic selection service definition
 service TopicSelection {
+    // Random cat facts stream
     rpc StreamMeowFacts (FactRequest) returns (stream FactResponse);
-    rpc StreamAnimeQuotes (QuoteRequest) returns (stream QuoteResponse);
+    // Color information format stream
+    rpc StreamColorInfo (ColorRequest) returns (stream ColorResponse);
 }
 
 message FactRequest {
@@ -18,13 +21,14 @@ message FactResponse {
     repeated string facts = 1; // list of meow facts
 }
 
-message QuoteRequest {
-    int32 second = 1; // time delay in second
-    int32 limit = 2; // maximum response, will be stop after reached
+message ColorRequest {
+    string name = 1; // color name
+    int32 second = 2; // time delay in second
+    int32 limit = 3; // maximum response, will be stop after reached
 }
 
-message QuoteResponse {
-    string anime = 1; // anime name
-    string character = 2; // character name
-    string quote = 3; // quote
+message ColorResponse {
+    string hex = 1; // Hex Value
+    string rgb = 2; // RGB Value
+    string hsl = 3; // HSL Value
 }
