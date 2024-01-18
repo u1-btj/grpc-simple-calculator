@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Todo struct {
@@ -26,48 +27,59 @@ type AnimeQuote struct {
 }
 
 type Color struct {
-	Status string
+	Status string `json:"status"`
 	Base   struct {
 		Hex struct {
 			Value string
-		}
+		} `json:"hex"`
 		Rgb struct {
 			Value string
-		}
+		} `json:"rgb"`
 		Hsl struct {
 			Value string
-		}
-	}
+		} `json:"hsl"`
+	} `json:"base"`
+	Error struct {
+		Message string
+	} `json:"error"`
 }
 
 func main() {
 	// url := "https://meowfacts.herokuapp.com?count=5"
-	url := "https://color.serialif.com/red"
-
+	colors := []string{"y", "blue", "green"}
 	// Create an HTTP GET request
-	resp, err := http.Get(url)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer resp.Body.Close()
+	for i := 0; i < len(colors); i++ {
+		url := "https://color.serialif.com/" + colors[i]
+		resp, err := http.Get(url)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer resp.Body.Close()
 
-	// Read the response body
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
+		// Read the response body
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	// var meow MeowFacts
-	var color Color
-	// err = json.Unmarshal(body, &meow)
-	err = json.Unmarshal(body, &color)
-	if err != nil {
-		log.Fatal(err)
+		// var meow MeowFacts
+		var color Color
+		// err = json.Unmarshal(body, &meow)
+		err = json.Unmarshal(body, &color)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if color.Status == "error" {
+			fmt.Println(color.Error.Message)
+		} else {
+			fmt.Println(color.Status)
+			fmt.Println(color.Base.Hex.Value)
+			fmt.Println(color.Base.Rgb.Value)
+			fmt.Println(color.Base.Hsl.Value)
+			fmt.Println()
+			time.Sleep(3 * time.Second)
+		}
 	}
-	fmt.Println(color.Status)
-	fmt.Println(color.Base.Hex.Value)
-	fmt.Println(color.Base.Rgb.Value)
-	fmt.Println(color.Base.Hsl.Value)
 
 	// for i := 0; i < len(meow.Data); i++ {
 	// 	fmt.Println(meow.Data[i])

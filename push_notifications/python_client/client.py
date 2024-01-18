@@ -41,16 +41,21 @@ def meow_facts_service():
 
 def color_info_service():
     print("\nYou choose Color Format Information Topic")
-    color = str(input('Enter color name : '))
+    all_color = []
+    total = int(input('Enter total color : '))
+
+    for i in range(1, total + 1):
+        color = str(input(f"Enter name for color - {i} : "))
+        all_color.append(color)
+
     second = int(input('Enter time delay (in second) : '))
-    limit = int(input('Enter total response : '))
 
-    request = topic_pb2.FactRequest(count=count, second=second, limit=limit)
-    i = 1
+    request = topic_pb2.ColorRequest(name=all_color, second=second)
+    i = 0
 
-    for meow_facts in stub.StreamMeowFacts(request):
-        print(f"{datetime.now()} Response - {i} :")
-        print(meow_facts)
+    for color_info in stub.StreamColorInfo(request):
+        print(f"{datetime.now()} Color - {all_color[i]} Information :")
+        print(color_info)
         i += 1
 
 def main_menu():

@@ -22,9 +22,8 @@ message FactResponse {
 }
 
 message ColorRequest {
-    string name = 1; // color name
+    repeated string name = 1; // list of color name
     int32 second = 2; // time delay in second
-    int32 limit = 3; // maximum response, will be stop after reached
 }
 
 message ColorResponse {
