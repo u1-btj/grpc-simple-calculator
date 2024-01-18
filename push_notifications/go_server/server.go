@@ -49,7 +49,7 @@ type Color struct {
 }
 
 func getFactsData(n int32) FactsData {
-	count := strconv.Itoa(int(n))
+	count := strconv.Itoa(int(n)) // convert into string
 	url := "https://meowfacts.herokuapp.com/?count=" + count
 
 	// Create an HTTP GET request
@@ -65,6 +65,7 @@ func getFactsData(n int32) FactsData {
 		log.Fatal(err)
 	}
 
+	// Decode json into struct object
 	var data FactsData
 	err = json.Unmarshal(body, &data)
 	if err != nil {
@@ -89,6 +90,7 @@ func getColorInfo(name string) Color {
 		log.Fatal(err)
 	}
 
+	// Decode json into struct object
 	var color Color
 	err = json.Unmarshal(body, &color)
 	if err != nil {
@@ -99,6 +101,8 @@ func getColorInfo(name string) Color {
 
 func (s *server) StreamMeowFacts(req *pb.FactRequest, stream pb.TopicSelection_StreamMeowFactsServer) error {
 	log.Printf("Received request to send %d cat facts every %d second for %d times", req.Count, req.Second, req.Limit)
+
+	// Get & send responses from API based on client requests
 	for i := 0; i < int(req.Limit); i++ {
 		allData := getFactsData(req.Count)
 		response := &pb.FactResponse{Facts: allData.Data}
@@ -115,12 +119,15 @@ func (s *server) StreamMeowFacts(req *pb.FactRequest, stream pb.TopicSelection_S
 
 func (s *server) StreamColorInfo(req *pb.ColorRequest, stream pb.TopicSelection_StreamColorInfoServer) error {
 	log.Printf("Received request to send color information every %d second for total of %d colors. Colors : %v.", req.Second, len(req.Name), req.Name)
+
+	// Get & send responses from API based on client requests
 	for i := 0; i < len(req.Name); i++ {
 		color := getColorInfo(req.Name[i])
 
 		// Handle error status from API (when color name not found)
 		if color.Status == "error" {
 			msg := req.Name[i] + " got this error " + color.Error.Message
+			log.Println(msg)
 			return status.Error(codes.InvalidArgument, msg)
 		}
 

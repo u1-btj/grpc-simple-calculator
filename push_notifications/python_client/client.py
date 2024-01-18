@@ -13,14 +13,17 @@ def main_service(option):
         elif option == 2:
             color_info_service()
 
+    # catch value error
     except ValueError:
         print('Please input the correct value type!')
         return 
     
+    # catch grpc error
     except grpc.RpcError as e:
         print(f"Rpc Error : {e.details()}")
         return 
     
+    # catch unknown exception
     except Exception as e:
         print(f"Exception : {e}")
         return
@@ -30,6 +33,11 @@ def meow_facts_service():
     count = int(input('Enter total facts per response : '))
     second = int(input('Enter time delay (in second) : '))
     limit = int(input('Enter total response : '))
+
+    # handle input value less than 1
+    if count < 1 or second < 1 or limit < 1:
+        print('Total facts, time delay, or total responses cannot less than 1!')
+        return
 
     request = topic_pb2.FactRequest(count=count, second=second, limit=limit)
     i = 1
@@ -49,6 +57,11 @@ def color_info_service():
         all_color.append(color)
 
     second = int(input('Enter time delay (in second) : '))
+
+    # handle input value less than 1
+    if total < 1 or second < 1:
+        print('Total color or time delay cannot less than 1!')
+        return
 
     request = topic_pb2.ColorRequest(name=all_color, second=second)
     i = 0
