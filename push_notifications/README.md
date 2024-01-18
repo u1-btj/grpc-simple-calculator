@@ -33,7 +33,7 @@ On go_server directory, run this command:
     
     go run server.go
 
-## Setup Client Server
+## Setup Python Client
 ### Make sure python and pyenv already installed and properly set
 [Install python](https://wiki.python.org/moin/BeginnersGuide/Download)  
 [Install pyenv](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation)
