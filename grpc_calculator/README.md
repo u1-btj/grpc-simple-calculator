@@ -1,4 +1,4 @@
-## **Assignment Task: Build a Simple Calculator gRPC Service**
+## **Assignment Task: Build a Simple Calculator gRPC Service!**
 
 More detailed objective and requirement from this task, [follow this link](https://gist.github.com/herizsh/042d92f7c489860a08d1b01e669eadcf).  
 If you want to build this project from scratch, [follow this step](https://github.com/u1-btj/grpc-simple-calculator/tree/main/grpc_calculator#how-to-build-this-project-from-scratch).  
