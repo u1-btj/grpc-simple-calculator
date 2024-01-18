@@ -26,7 +26,7 @@ Verify if protoc already properly set
 ### Create project directory and go inside that directory
 
     mkdir grpc-simple-calculator
-    cd grpc-simple-calculator
+    cd grpc-simple-calculator/grpc_calculator
 
 ### Initialize golang project
 
